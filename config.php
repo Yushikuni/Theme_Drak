@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 $THEME->name = "drak";
 $THEME->sheets = [];
 $THEME->editor_sheets = [];
-$THEME->parents = ["drak"];
+$THEME->parents = ['boost'];
 $THEME->enable_dock = false;
 $THEME->yuicsmodules = array();
 $THEME->renderfactory = "theme_overriden_renderer_factory";
@@ -38,3 +38,4 @@ $THEME->scss = function($theme)
 {
     return theme_drak_get_main_scss_content($theme);
 };
+$THEME->hidefromselector

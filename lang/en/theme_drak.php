@@ -24,12 +24,12 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$string['choosereadme'] = "This theme is a child theme of drak";
+$string['choosereadme'] = "This theme is a child theme of boost";
 $string['pluginname'] = "drak";
 $string['region-side-pre'] = "Right";
 $string['brandcolor'] = 'Brand colour';  
 $string['brandcolor_desc'] = 'The accent colour.';    
-$string['configtitle'] = 'Drak settings';  
+$string['configtitle'] = 'Drak custom settings';  
 $string['generalsettings'] = 'General settings';
 $string['presetfiles'] = 'Additional theme preset files';
 $string['preset'] = 'Theme preset'; 

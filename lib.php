@@ -53,13 +53,13 @@ function theme_drak_get_main_scss_content($theme)
     {
          // We got the stored file - copy it to dataroot.                                                                            
         // This location matches the searched for location in theme_config::resolve_image_location.                                 
-        $pathname = $CFG->dataroot . '/pix_plugins/theme/photo/' . $settingname . '.' . $extension;                                 
+        $pathname = $CFG->dataroot . '/pix_plugins/theme/drak/' . $settingname . '.' . $extension;                                 
  
         // This pattern matches any previous files with maybe different file extensions.                                            
-        $pathpattern = $CFG->dataroot . '/pix_plugins/theme/photo/' . $settingname . '.*';                                          
+        $pathpattern = $CFG->dataroot . '/pix_plugins/theme/drak/' . $settingname . '.*';                                          
  
         // Make sure this dir exists.                                                                                               
-        @mkdir($CFG->dataroot . '/pix_plugins/theme/photo/', $CFG->directorypermissions, true);                                      
+        @mkdir($CFG->dataroot . '/pix_plugins/theme/drak/', $CFG->directorypermissions, true);                                      
  
         // Delete any existing files for this setting.                                                                              
         foreach (glob($pathpattern) as $filename) {                                                                                 
@@ -73,12 +73,12 @@ function theme_drak_get_main_scss_content($theme)
     if ($filename == 'default.scss') 
     {                                                                                              
         // We still load the default preset files directly from the boost theme. No sense in duplicating them.                      
-        $scss .= file_get_contents($CFG->dirroot . '/theme/drak/scss/preset/default.scss');                                        
+        $scss .= file_get_contents($CFG->dirroot . '/theme/boost/scss/preset/default.scss');                                        
     } 
     else if ($filename == 'plain.scss') 
     {                                                                                         
         // We still load the default preset files directly from the boost theme. No sense in duplicating them.                      
-        $scss .= file_get_contents($CFG->dirroot . '/theme/drak/scss/preset/plain.scss');                                          
+        $scss .= file_get_contents($CFG->dirroot . '/theme/boost/scss/preset/plain.scss');                                          
  
     } 
     else if ($filename && ($presetfile = $fs->get_file($context->id, 'theme_drak', 'preset', 0, '/', $filename))) 
@@ -89,7 +89,7 @@ function theme_drak_get_main_scss_content($theme)
     else 
     {                                                                                                                        
         // Safety fallback - maybe new installs etc.                                                                                
-        $scss .= file_get_contents($CFG->dirroot . '/theme/drak/scss/preset/default.scss');                                        
+        $scss .= file_get_contents($CFG->dirroot . '/theme/boost/scss/preset/default.scss');                                        
     }                                                                                                                                       
  
     // Pre CSS - this is loaded AFTER any prescss from the setting but before the main scss.                                        
