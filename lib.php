@@ -21,85 +21,36 @@
  * @copyright 2021 Květa
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-
+ // This line protects the file from being accessed by a URL directly.                                                               
 defined('MOODLE_INTERNAL') || die();
-function theme_drak_get_main_scss_content($theme) 
-{                                                                                
+ 
+// We will add callbacks here as we add features to our theme.
+function theme_drak_get_main_scss_content($theme) {                                                                                
     global $CFG;                                                                                                                    
  
     $scss = '';                                                                                                                     
     $filename = !empty($theme->settings->preset) ? $theme->settings->preset : null;                                                 
     $fs = get_file_storage();                                                                                                       
-    //setting name was updated comes as a tring like 's_theme...'
-    //we split in o '_' char.
-    $parts = explode('_',$settingname);
-    $settingname = end($parts);
-
-    //admin srttings are stoled in system context
-    $syscontex = contex_system::instace();
-        //this s the omonent name the stting is stred in
-    $component = 'theme_drak';
-
-    //this value of admin setting hich is th filename of uploaded file
-    $filename = get_config($component,$settingname);
-    $extension = substr($filename, strrpos($filename,'.')+1);
-
-    //this is the full path in moodle internal file system
-    $fullpath = "/{$syscontex->id}/{$component}/{$settingname}/0{$filname}";
-    //get instace of the moodle file storage
-    $fs = get_file_storade();
-    //this os an efficient way to get a file if we know the exact path
-    if($file = $fs->get_file_by_hash(sha1($fullpath)))
-    {
-         // We got the stored file - copy it to dataroot.                                                                            
-        // This location matches the searched for location in theme_config::resolve_image_location.                                 
-        $pathname = $CFG->dataroot . '/pix_plugins/theme/drak/' . $settingname . '.' . $extension;                                 
  
-        // This pattern matches any previous files with maybe different file extensions.                                            
-        $pathpattern = $CFG->dataroot . '/pix_plugins/theme/drak/' . $settingname . '.*';                                          
- 
-        // Make sure this dir exists.                                                                                               
-        @mkdir($CFG->dataroot . '/pix_plugins/theme/drak/', $CFG->directorypermissions, true);                                      
- 
-        // Delete any existing files for this setting.                                                                              
-        foreach (glob($pathpattern) as $filename) {                                                                                 
-            @unlink($filename);                                                                                                     
-        }                                                                                                                           
- 
-        // Copy the current file to this location.                                                                                  
-        $file->copy_content_to($pathname);                                                                                          
-    }                                                                                                                               
     $context = context_system::instance();                                                                                          
-    if ($filename == 'default.scss') 
-    {                                                                                              
+    if ($filename == 'default.scss') {                                                                                              
         // We still load the default preset files directly from the boost theme. No sense in duplicating them.                      
         $scss .= file_get_contents($CFG->dirroot . '/theme/boost/scss/preset/default.scss');                                        
-    } 
-    else if ($filename == 'plain.scss') 
-    {                                                                                         
+    } else if ($filename == 'plain.scss') {                                                                                         
         // We still load the default preset files directly from the boost theme. No sense in duplicating them.                      
         $scss .= file_get_contents($CFG->dirroot . '/theme/boost/scss/preset/plain.scss');                                          
  
-    } 
-    else if ($filename && ($presetfile = $fs->get_file($context->id, 'theme_drak', 'preset', 0, '/', $filename))) 
-    {              
+    } else if ($filename && ($presetfile = $fs->get_file($context->id, 'theme_drak', 'preset', 0, '/', $filename))) {              
         // This preset file was fetched from the file area for theme_drak and not theme_boost (see the line above).                
         $scss .= $presetfile->get_content();                                                                                        
-    } 
-    else 
-    {                                                                                                                        
+    } else {                                                                                                                        
         // Safety fallback - maybe new installs etc.                                                                                
         $scss .= file_get_contents($CFG->dirroot . '/theme/boost/scss/preset/default.scss');                                        
     }                                                                                                                                       
- 
     // Pre CSS - this is loaded AFTER any prescss from the setting but before the main scss.                                        
     $pre = file_get_contents($CFG->dirroot . '/theme/drak/scss/pre.scss');                                                         
     // Post CSS - this is loaded AFTER the main scss but before the extra scss from the setting.                                    
-    $post = file_get_contents($CFG->dirroot . '/theme/drak/scss/post.scss');                                                       
-    // Reset theme caches.                                                                                                          
-    theme_reset_all_caches();  
-    
+    $post = file_get_contents($CFG->dirroot . '/theme/drak/scss/post.scss');     
     // Combine them together.                                                                                                       
-    return $pre . "\n" . $scss . "\n" . $post;  
-                                                                                                                                                                                                                       
+    return $pre . "\n" . $scss . "\n" . $post;                                                                                                                    
 }

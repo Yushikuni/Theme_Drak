@@ -27,5 +27,5 @@ defined('MOODLE_INTERNAL') || die();
 $plugin->version = "2021061000";
 $plugin->rquires = "2021052700";
 $plugin->component = "theme_drak";
-$plugin->dependencies = ['theme_drak' => '2021052700'];
-$plugin->maturity = MATURITY_ALPHA;//MATURITY_STABLE ->stabilní verze, _RC->release candidát, _BETA->je beta, _ALFA->hodně bugů a práce na 25%
+$plugin->dependencies = ['theme_boost' => '2021052700'];
+//$plugin->maturity = MATURITY_ALPHA;//MATURITY_STABLE ->stabilní verze, _RC->release candidát, _BETA->je beta, _ALFA->hodně bugů a práce na 25%
