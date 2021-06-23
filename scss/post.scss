@@ -1,8 +1,24 @@
 //for rules
 
-#page-content
+#page
 {                                                                                                           
     //background-image: url([[pix:theme_drak|loginbackgroundimage]]);                                                                
     //background-size: cover;     
     background-color: #000000;                                                                                                    
+}
+#page-header
+{
+    background-color: #000000;
+}
+#nav-drawer
+{
+    background-color: #FBFBFB;
+}
+#card-body
+{
+    display:none;
+}
+.section .activity .activityinstance
+{
+    min-width: 40%;
 }
