@@ -21,7 +21,6 @@
  */
 
 defined('MOODLE_INTERNAL') || die();
-
 if ($ADMIN->fulltree) 
 {
     $settings = new theme_boost_admin_settingspage_tabs('themesettingdrak', get_string('configtitle', 'theme_drak'));

@@ -30,45 +30,9 @@ function theme_drak_get_main_scss_content($theme)
     $scss = '';                                                                                                                     
     $filename = !empty($theme->settings->preset) ? $theme->settings->preset : null;                                                 
     $fs = get_file_storage();                                                                                                       
-    //setting name was updated comes as a tring like 's_theme...'
-    //we split in o '_' char.
-    $parts = explode('_',$settingname);
-    $settingname = end($parts);
-
-    //admin srttings are stoled in system context
-    $syscontex = contex_system::instace();
-        //this s the omonent name the stting is stred in
-    $component = 'theme_drak';
-
-    //this value of admin setting hich is th filename of uploaded file
-    $filename = get_config($component,$settingname);
-    $extension = substr($filename, strrpos($filename,'.')+1);
-
-    //this is the full path in moodle internal file system
-    $fullpath = "/{$syscontex->id}/{$component}/{$settingname}/0{$filname}";
-    //get instace of the moodle file storage
-    $fs = get_file_storade();
-    //this os an efficient way to get a file if we know the exact path
-    if($file = $fs->get_file_by_hash(sha1($fullpath)))
-    {
-         // We got the stored file - copy it to dataroot.                                                                            
-        // This location matches the searched for location in theme_config::resolve_image_location.                                 
-        $pathname = $CFG->dataroot . '/pix_plugins/theme/photo/' . $settingname . '.' . $extension;                                 
  
-        // This pattern matches any previous files with maybe different file extensions.                                            
-        $pathpattern = $CFG->dataroot . '/pix_plugins/theme/photo/' . $settingname . '.*';                                          
  
-        // Make sure this dir exists.                                                                                               
-        @mkdir($CFG->dataroot . '/pix_plugins/theme/photo/', $CFG->directorypermissions, true);                                      
- 
-        // Delete any existing files for this setting.                                                                              
-        foreach (glob($pathpattern) as $filename) {                                                                                 
-            @unlink($filename);                                                                                                     
-        }                                                                                                                           
- 
-        // Copy the current file to this location.                                                                                  
-        $file->copy_content_to($pathname);                                                                                          
-    }                                                                                                                               
+                                                                                                                             
     $context = context_system::instance();                                                                                          
     if ($filename == 'default.scss') 
     {                                                                                              
